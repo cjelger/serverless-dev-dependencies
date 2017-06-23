@@ -1,0 +1,29 @@
+service: ccs-poc
+
+# We package each function in a separate zip
+package:
+  individually: true
+  exclude:
+    - ./**
+
+provider:
+  name: openwhisk
+  runtime: nodejs:default
+  ignore_certs: true
+
+plugins:
+  - serverless-openwhisk
+
+functions:
+
+  project1:
+    handler: src/project1/index.main
+    package:
+      include:
+        - src/project1/**
+
+  project2:
+    handler: src/project2/index.main
+    package:
+      include:
+        - src/project2/**
